@@ -1,0 +1,35 @@
+The Software sends "AA AA 01 00 00 00 00 00 00 01 55" (which requests the serial number)
+
+The inverter replies with (in my case): "AA AA 00 00 01 00 00 80 0A 30 39 30 39 42 4F 30 34 35 30 04 0B"
+the "30 39 30 39 42 4F 30 34 35 30" is the serial number in ASCII (in my case 0909BO0450)
+
+The Software replies back with what appears to be a confirmation of the serial number:
+"AA AA 01 00 00 00 00 01 0B 30 39 30 39 42 4F 30 34 35 30 01 03 8E"
+
+The inverter responds with something, I'm not sure what - I will confirm tomorrow   but I'm not sure it matters much.
+
+After that, the Software polls for data every 30 seconds or so, with the following string:
+"AA AA 01 00 00 01 01 02 00 01 59"
+
+And the inverter then sends all data in one long packet that looks something like this:
+
+AA AA 00 01 01 00 01 82 28 01 C5 0A FB 00 22 09 DD 13 8B 03 3F FF FF 00 00 23 51 00 00 05 35 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 08 61
+
+After polling this for a few cycles and seeing which values changed - and comparing them with the readings on the inverter itself and on Pro Control I managed to figure out which bytes represented each values.
+
+The first 9 bytes are part of the header (AA AA 00 01 01 00 01 82 28) - the next few are the interesting ones   
+
+Bytes 9 and 10 (here 01 C5) represent the inverter temperature in 0.1 degrees C (453 = 45.3degC)
+11 and 12 (0A FB) = 2811 (281.1V) PV Voltage (Vdc)
+13 and 14 (00 22) = 34 (3.4A) Current to Grid (Iac)
+15 and 16 (09 DD) = 2525 (252.5 Volts) Grid Voltage (Vac)
+17 and 18 (13 8B) = 5003 = 50.03 Hz Grid Freq (Fac)
+19 and 20 (03 3F) = 831 W = Power to Grid (Pac)
+21 and 22 (FF FF) = 65535 appears to be Grid impedance. mOhm (not available on my inverter)
+23 and 24 (00 00) = 0 (n/a)
+25 and 26 (23 51) = 9040 (904.0 kWh) - total system output since installation date
+27 and 28 (00 00) = 0 (n/a)
+29 and 30 (05 35) = 1333 hours the inverter has run since installation date
+31 and 32 (00 01) = 1 - inverter operating mode, 1 = normal, 0 = wait.
+
+
