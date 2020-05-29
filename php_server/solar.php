@@ -176,7 +176,7 @@ else if(isset($_GET["data"])) // arriva un payload dalla board NodeMCU remota. S
 	$id = $chunks[0];
 	$payload = $chunks[1];
 
-	if($payload != "")
+	if($payload != "" && $id != "found")
 	{		
 		if(file_exists($id.".txt"))
 		{
