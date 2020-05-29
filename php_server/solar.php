@@ -1,7 +1,7 @@
 <?php
 /********************************************************
 * 
-* SolarFI ver 1.3.0 - Server PHP
+* SolarFI ver 1.3.1 - Server PHP
 * 
 * - Colleziona e salva i dati provenienti dalle schede NodeMCU remote
 * - Mostra una pagina HTML di produzione giornaliera
@@ -266,10 +266,10 @@ else // l'utente accede al pagina di produzione, mostra HTML e dati di produzion
 			echo "<td>Iac1:".$data["iac1"]."</td><td>Vac1:".$data["vac1"]."</td><td>Fac1:".$data["fac1"]."</td>";
 			echo "</tr>";
 			echo "<tr>";			
-			echo "<td>Iac2:".$data["iac2"]."</td><td>Vac2:".$data["vac2"]."</td><td>Fac1:".$data["fac2"]."</td>";
+			echo "<td>Iac2:".$data["iac2"]."</td><td>Vac2:".$data["vac2"]."</td><td>Fac2:".$data["fac2"]."</td>";
 			echo "</tr>";
 			echo "<tr>";
-			echo "<td>Iac3:".$data["iac3"]."</td><td>Vac3:".$data["vac3"]."</td><td>Fac1:".$data["fac3"]."</td>";
+			echo "<td>Iac3:".$data["iac3"]."</td><td>Vac3:".$data["vac3"]."</td><td>Fac3:".$data["fac3"]."</td>";
 			echo "</tr>";
 			echo "</table>";
 
